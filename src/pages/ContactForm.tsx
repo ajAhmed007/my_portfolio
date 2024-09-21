@@ -7,13 +7,16 @@ import {
   Card,
   CardContent,
   IconButton,
+  Snackbar,
+  Alert,
 } from "@mui/material";
-import { Email, Phone, LocationOn } from "@mui/icons-material";
+import { Email, LocationOn } from "@mui/icons-material";
 
 const ContactForm: React.FC = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false); // For Snackbar
 
   const validate = () => {
     let tempErrors = { name: "", email: "", message: "" };
@@ -47,10 +50,15 @@ const ContactForm: React.FC = () => {
 
     if (validate()) {
       setSubmitted(true);
+      setOpenSnackbar(true); // Open Snackbar on successful submit
       console.log(form);
       setForm({ name: "", email: "", message: "" });
       setErrors({ name: "", email: "", message: "" });
     }
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false); // Close Snackbar after a few seconds
   };
 
   return (
@@ -60,7 +68,7 @@ const ContactForm: React.FC = () => {
           Contact Me
         </Typography>
 
-        {submitted && (
+        {/* {submitted && (
           <Typography
             variant="h6"
             align="center"
@@ -68,7 +76,7 @@ const ContactForm: React.FC = () => {
           >
             Thank you for your message! I'll get back to you soon.
           </Typography>
-        )}
+        )} */}
 
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
@@ -134,25 +142,35 @@ const ContactForm: React.FC = () => {
         </form>
 
         <Grid container spacing={2} sx={{ mt: 4 }}>
-          <Grid item xs={12} sm={4} sx={{ textAlign: "center" }}>
+          <Grid item xs={12} sm={6} sx={{ textAlign: "center" }}>
             <IconButton>
               <Email sx={{ fontSize: 40, color: "primary.main" }} />
             </IconButton>
             <Typography variant="body1">your.email@example.com</Typography>
           </Grid>
-          <Grid item xs={12} sm={4} sx={{ textAlign: "center" }}>
-            <IconButton>
-              <Phone sx={{ fontSize: 40, color: "primary.main" }} />
-            </IconButton>
-            <Typography variant="body1">+123-456-7890</Typography>
-          </Grid>
-          <Grid item xs={12} sm={4} sx={{ textAlign: "center" }}>
+          <Grid item xs={12} sm={6} sx={{ textAlign: "center" }}>
             <IconButton>
               <LocationOn sx={{ fontSize: 40, color: "primary.main" }} />
             </IconButton>
             <Typography variant="body1">Seattle, WA</Typography>
           </Grid>
         </Grid>
+
+        {/* Snackbar Component */}
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={3000}
+          onClose={handleCloseSnackbar}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }} // This sets the position to top right
+        >
+          <Alert
+            onClose={handleCloseSnackbar}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Message sent successfully!
+          </Alert>
+        </Snackbar>
       </CardContent>
     </Card>
   );

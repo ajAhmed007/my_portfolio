@@ -16,6 +16,12 @@ import {
   SiPython,
   SiTypescript,
   SiSpringboot,
+  SiApachekafka,
+  SiDocker,
+  SiRedis,
+  SiGit,
+  SiPostgresql,
+  SiNodedotjs,
 } from "react-icons/si";
 import { Helmet } from "react-helmet-async";
 // src/pages/Home.tsx
@@ -40,7 +46,14 @@ const Home: React.FC = () => {
       <Avatar
         alt="Ahmed Abdullahi"
         src={myPhoto}
-        sx={{ width: 150, height: 150, margin: "auto", mb: 4 }}
+        sx={{
+          width: 150,
+          height: 150,
+          margin: "auto",
+          mb: 4,
+          border: `4px solid ${theme.palette.primary.main}`,
+          boxShadow: 2,
+        }}
       />
 
       {/* Introduction */}
@@ -49,8 +62,15 @@ const Home: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <Typography variant="h2" gutterBottom>
-          Hi, I'm Ahmed Abdullahi
+        <Typography
+          variant="h2"
+          sx={{
+            fontWeight: "bold",
+            mb: 2,
+            color: theme.palette.mode === "light" ? "#000" : "#fff", // Dynamically set color
+          }}
+        >
+          Hi, I'm Ahmed 👋
         </Typography>
       </motion.div>
       <Typography variant="h5" gutterBottom>
@@ -115,25 +135,18 @@ const Home: React.FC = () => {
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
           <SiTypescript size={40} style={{ margin: "0 10px" }} />
-          <SiPython size={40} style={{ margin: "0 10px" }} />
           <SiReact size={40} style={{ margin: "0 10px" }} />
+          <SiNodedotjs size={40} style={{ margin: "0 10px" }} />
           <SiSpringboot size={40} style={{ margin: "0 10px" }} />
+          <SiApachekafka size={40} style={{ margin: "0 10px" }} />
+          <SiDocker size={40} style={{ margin: "0 10px" }} />
+          <SiRedis size={40} style={{ margin: "0 10px" }} />
+          <SiGit size={40} style={{ margin: "0 10px" }} />
+          <SiPostgresql size={40} style={{ margin: "0 10px" }} />
+
           {/* Add more icons as needed */}
         </Box>
       </Box>
-
-      {/* Key Achievements */}
-      <Grid container spacing={4} sx={{ mt: 6 }}>
-        <Grid item xs={6} sm={3} sx={{ textAlign: "center" }}>
-          <Typography variant="h3">1.5+</Typography>
-          <Typography variant="subtitle1">Years Experience</Typography>
-        </Grid>
-        <Grid item xs={6} sm={3} sx={{ textAlign: "center" }}>
-          <Typography variant="h3">10+</Typography>
-          <Typography variant="subtitle1">Projects Completed</Typography>
-        </Grid>
-        {/* Add more statistics if desired */}
-      </Grid>
 
       {/* Testimonials */}
       <Box sx={{ mt: 6 }}>
@@ -158,23 +171,7 @@ const Home: React.FC = () => {
           mt: 6,
           flexWrap: "wrap",
         }}
-      >
-        <img
-          src="/assets/images/costar-logo.png"
-          alt="CoStar Group"
-          style={{ margin: "15px", height: 50 }}
-        />
-        <img
-          src="/assets/images/target-logo.png"
-          alt="Target"
-          style={{ margin: "15px", height: 50 }}
-        />
-        <img
-          src="/assets/images/cquest-ip-logo.png"
-          alt="Cquest-IP"
-          style={{ margin: "15px", height: 50 }}
-        />
-      </Box>
+      ></Box>
     </Container>
   );
 };

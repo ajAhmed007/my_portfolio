@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   AppBar,
   Toolbar,
@@ -7,10 +7,10 @@ import {
   IconButton,
   useTheme,
   Box,
-} from '@mui/material';
-import { Link } from 'react-router-dom';
-import { Brightness4, Brightness7 } from '@mui/icons-material';
-import { ColorModeContext } from '../ThemeProvider';
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import { Brightness4, Brightness7 } from "@mui/icons-material";
+import { ColorModeContext } from "../ThemeProvider";
 
 const Navbar: React.FC = () => {
   const theme = useTheme();
@@ -20,13 +20,13 @@ const Navbar: React.FC = () => {
     <AppBar
       position="fixed"
       sx={{
-        background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+        background: `linear-gradient(135deg, #6a11cb 30%, #2575fc 90%)`, // New gradient
         boxShadow: theme.shadows[4],
       }}
     >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-          Your Name
+          Ahmed Abdullahi
         </Typography>
 
         {/* Navigation Links */}
