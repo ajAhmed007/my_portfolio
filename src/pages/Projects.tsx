@@ -53,6 +53,14 @@ const projects = [
     technologies: ["Python", "TensorFlow", "Keras"],
     link: "https://github.com/yourusername/project-five",
   },
+  {
+    title: "Project Six",
+    description:
+      "A machine learning project focused on predictive analysis using neural networks.",
+    image: "/assets/images/project-five.jpg",
+    technologies: ["Python", "TensorFlow", "Keras"],
+    link: "https://github.com/yourusername/project-six",
+  },
 ];
 
 const Projects: React.FC = () => {

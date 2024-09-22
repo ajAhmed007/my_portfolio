@@ -54,7 +54,7 @@ const About: React.FC = () => {
             gutterBottom
             sx={{ fontWeight: "bold", color: "#fff" }}
           >
-            Hi, I'm Ahmed
+            Welcome! Ahmed Abdullahi at your service
           </Typography>
           <Typography variant="h5" sx={{ color: "#eee", mb: 2 }}>
             Full-Stack Developer | Passionate about Building Scalable Solutions
