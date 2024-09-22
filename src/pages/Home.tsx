@@ -5,28 +5,15 @@ import {
   Button,
   Box,
   Avatar,
-  Grid,
   IconButton,
   useTheme,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
-import {
-  SiReact,
-  SiPython,
-  SiTypescript,
-  SiSpringboot,
-  SiApachekafka,
-  SiDocker,
-  SiRedis,
-  SiGit,
-  SiPostgresql,
-  SiNodedotjs,
-} from "react-icons/si";
 import { Helmet } from "react-helmet-async";
-// src/pages/Home.tsx
-import myPhoto from '../assets/images/ahmed-abdullahi.jpeg'; 
+import myPhoto from "../assets/images/ahmed-abdullahi.jpeg";
 import { motion } from "framer-motion";
+import KeySkills from "../components/KeySkills";
 
 const Home: React.FC = () => {
   const theme = useTheme();
@@ -40,11 +27,15 @@ const Home: React.FC = () => {
           name="description"
           content="Welcome to Ahmed Abdullahi's professional portfolio. Discover my projects, skills, and experience in Full-Stack Development."
         />
+        <meta
+          name="keywords"
+          content="Ahmed Abdullahi, Full-Stack Developer, React, TypeScript, Spring Boot, Software Engineer"
+        />
       </Helmet>
 
       {/* Professional Photo */}
       <Avatar
-        alt="Ahmed Abdullahi"
+        alt="Ahmed Abdullahi professional headshot"
         src={myPhoto}
         sx={{
           width: 150,
@@ -67,17 +58,17 @@ const Home: React.FC = () => {
           sx={{
             fontWeight: "bold",
             mb: 2,
-            color: theme.palette.mode === "light" ? "#000" : "#fff", // Dynamically set color
+            color: theme.palette.mode === "light" ? "#000" : "#fff",
           }}
         >
           Hi, I'm Ahmed 👋
         </Typography>
       </motion.div>
+
       <Typography variant="h5" gutterBottom>
         Passionate Software Engineer specializing in Full-Stack Development
       </Typography>
 
-      {/* Personal Branding Statement */}
       <Typography variant="body1" paragraph>
         I build scalable and efficient software solutions that drive business
         success.
@@ -90,7 +81,13 @@ const Home: React.FC = () => {
           color="primary"
           component={Link}
           to="/projects"
-          sx={{ mr: 2 }}
+          sx={{
+            mr: 2,
+            padding: "10px 20px",
+            "&:hover": {
+              backgroundColor: theme.palette.primary.dark,
+            },
+          }}
         >
           View My Work
         </Button>
@@ -99,6 +96,12 @@ const Home: React.FC = () => {
           color="primary"
           component={Link}
           to="/contact"
+          sx={{
+            padding: "10px 20px",
+            "&:hover": {
+              backgroundColor: theme.palette.primary.light,
+            },
+          }}
         >
           Contact Me
         </Button>
@@ -110,19 +113,32 @@ const Home: React.FC = () => {
           href="https://www.linkedin.com/in/ahmedabdullahi/"
           target="_blank"
           aria-label="LinkedIn"
+          sx={{
+            mx: 1,
+            "&:hover": {
+              color: "#005582", // This will change the color of the icon on hover
+            },
+          }}
         >
           <FaLinkedin
-            size={30}
+            size={35}
             color={theme.palette.mode === "dark" ? "#ffffff" : "#0e76a8"}
           />
         </IconButton>
+
         <IconButton
           href="https://github.com/ajAhmed007"
           target="_blank"
           aria-label="GitHub"
+          sx={{
+            mx: 1,
+            "&:hover": {
+              color: "#333", // Change the icon color on hover
+            },
+          }}
         >
           <FaGithub
-            size={30}
+            size={35}
             color={theme.palette.mode === "dark" ? "#ffffff" : "#000000"}
           />
         </IconButton>
@@ -133,33 +149,26 @@ const Home: React.FC = () => {
         <Typography variant="h5" gutterBottom>
           Technologies I Work With
         </Typography>
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-          <SiTypescript size={40} style={{ margin: "0 10px" }} />
-          <SiReact size={40} style={{ margin: "0 10px" }} />
-          <SiNodedotjs size={40} style={{ margin: "0 10px" }} />
-          <SiSpringboot size={40} style={{ margin: "0 10px" }} />
-          <SiApachekafka size={40} style={{ margin: "0 10px" }} />
-          <SiDocker size={40} style={{ margin: "0 10px" }} />
-          <SiRedis size={40} style={{ margin: "0 10px" }} />
-          <SiGit size={40} style={{ margin: "0 10px" }} />
-          <SiPostgresql size={40} style={{ margin: "0 10px" }} />
-
-          {/* Add more icons as needed */}
-        </Box>
-      </Box>
-
-      {/* Testimonials */}
-      <Box sx={{ mt: 6 }}>
-        <Typography variant="h5" gutterBottom>
-          Testimonials
-        </Typography>
-        <Typography variant="body1" sx={{ fontStyle: "italic" }}>
-          "An outstanding developer who consistently delivers high-quality
-          work."
-        </Typography>
-        <Typography variant="subtitle2" color="textSecondary">
-          — John Doe, Senior Developer at TechCorp
-        </Typography>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.1 } },
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              mt: 2,
+            }}
+          >
+            {/* Tecchnologies I Work With*/}
+            <KeySkills/>
+          </Box>
+        </motion.div>
       </Box>
 
       {/* Client Logos */}
@@ -171,7 +180,9 @@ const Home: React.FC = () => {
           mt: 6,
           flexWrap: "wrap",
         }}
-      ></Box>
+      >
+        {/* Placeholder for Client Logos */}
+      </Box>
     </Container>
   );
 };
