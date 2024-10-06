@@ -59,9 +59,26 @@ const Home: React.FC = () => {
             fontWeight: "bold",
             mb: 2,
             color: theme.palette.mode === "light" ? "#000" : "#fff",
+            display: "inline-flex",
+            alignItems: "center",
+            "& .wave": {
+              display: "inline-block",
+              animation: "wave 2s infinite", // Apply the wave animation
+              transformOrigin: "70% 70%", // Define where the wave originates
+            },
+            "@keyframes wave": {
+              "0%": { transform: "rotate(0deg)" },
+              "10%": { transform: "rotate(14deg)" },
+              "20%": { transform: "rotate(-8deg)" },
+              "30%": { transform: "rotate(14deg)" },
+              "40%": { transform: "rotate(-4deg)" },
+              "50%": { transform: "rotate(10deg)" },
+              "60%": { transform: "rotate(0deg)" },
+              "100%": { transform: "rotate(0deg)" },
+            },
           }}
         >
-          Hi, I'm Ahmed 👋
+          Hi, I'm Ahmed <span className="wave">👋</span>
         </Typography>
       </motion.div>
 
@@ -93,13 +110,16 @@ const Home: React.FC = () => {
         </Button>
         <Button
           variant="outlined"
-          color="primary"
+          color="secondary"
           component={Link}
           to="/contact"
           sx={{
             padding: "10px 20px",
+            backgroundColor: "green",
+            color: "white",
             "&:hover": {
-              backgroundColor: theme.palette.primary.light,
+              backgroundColor: "darkgreen",
+              color: "white",
             },
           }}
         >
@@ -166,7 +186,7 @@ const Home: React.FC = () => {
             }}
           >
             {/* Tecchnologies I Work With*/}
-            <KeySkills/>
+            <KeySkills />
           </Box>
         </motion.div>
       </Box>
