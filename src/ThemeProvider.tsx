@@ -1,6 +1,4 @@
-// src/ThemeProvider.tsx
-
-import React, { createContext, useMemo, useState } from "react";
+import React, { createContext, useMemo, useState, useEffect } from "react";
 import { ThemeProvider as MuiThemeProvider, CssBaseline } from "@mui/material";
 import { lightTheme, darkTheme } from "./theme";
 
@@ -15,7 +13,14 @@ export const ColorModeContext = createContext<ColorModeContextType>({
 const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [mode, setMode] = useState<"light" | "dark">("light");
+  // Check if there is a saved theme mode in localStorage, default to "dark"
+  const storedMode = localStorage.getItem("themeMode") as "light" | "dark";
+  const [mode, setMode] = useState<"light" | "dark">(storedMode || "dark");
+
+  // Update localStorage whenever mode changes
+  useEffect(() => {
+    localStorage.setItem("themeMode", mode);
+  }, [mode]);
 
   const colorMode = useMemo(
     () => ({
