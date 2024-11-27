@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   Container,
   Typography,
@@ -18,6 +18,12 @@ import KeySkills from "../components/KeySkills";
 const Home: React.FC = () => {
   const theme = useTheme();
 
+  // Memoize the animation variants
+  const animationVariants = useCallback(() => ({
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.1 } },
+  }), []);
+
   return (
     <Container maxWidth="md" sx={{ textAlign: "center", mt: 12 }}>
       {/* SEO Meta Tags */}
@@ -34,18 +40,24 @@ const Home: React.FC = () => {
       </Helmet>
 
       {/* Professional Photo */}
-      <Avatar
-        alt="Ahmed Abdullahi professional headshot"
-        src={myPhoto}
-        sx={{
-          width: 150,
-          height: 150,
-          margin: "auto",
-          mb: 4,
-          border: `4px solid ${theme.palette.primary.main}`,
-          boxShadow: 2,
-        }}
-      />
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Avatar
+          alt="Ahmed Abdullahi professional headshot"
+          src={myPhoto}
+          sx={{
+            width: 150,
+            height: 150,
+            margin: "auto",
+            mb: 4,
+            border: `4px solid ${theme.palette.primary.main}`,
+            boxShadow: 2,
+          }}
+        />
+      </motion.div>
 
       {/* Introduction */}
       <motion.div
@@ -83,7 +95,7 @@ const Home: React.FC = () => {
       </motion.div>
 
       <Typography variant="h5" gutterBottom>
-        Passionate Software Engineer specializing in Full-Stack Development
+        Full-Stack Software Engineer
       </Typography>
 
       <Typography variant="body1" paragraph>
@@ -109,7 +121,7 @@ const Home: React.FC = () => {
           View My Work
         </Button>
         <Button
-          variant="outlined"
+          variant="contained"
           color="secondary"
           component={Link}
           to="/contact"
@@ -119,7 +131,6 @@ const Home: React.FC = () => {
             color: "white",
             "&:hover": {
               backgroundColor: "darkgreen",
-              color: "white",
             },
           }}
         >
@@ -132,11 +143,12 @@ const Home: React.FC = () => {
         <IconButton
           href="https://www.linkedin.com/in/ahmedabdullahi/"
           target="_blank"
+          rel="noopener noreferrer"
           aria-label="LinkedIn"
           sx={{
             mx: 1,
             "&:hover": {
-              color: "#005582", // This will change the color of the icon on hover
+              color: "#005582",
             },
           }}
         >
@@ -153,7 +165,7 @@ const Home: React.FC = () => {
           sx={{
             mx: 1,
             "&:hover": {
-              color: "#333", // Change the icon color on hover
+              color: "#333",
             },
           }}
         >
@@ -172,10 +184,7 @@ const Home: React.FC = () => {
         <motion.div
           initial="hidden"
           animate="visible"
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.1 } },
-          }}
+          variants={animationVariants()}
         >
           <Box
             sx={{
@@ -185,7 +194,6 @@ const Home: React.FC = () => {
               mt: 2,
             }}
           >
-            {/* Tecchnologies I Work With*/}
             <KeySkills />
           </Box>
         </motion.div>

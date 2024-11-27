@@ -1,0 +1,45 @@
+# Ignore node_modules folder for both frontend and backend
+node_modules/
+
+# Ignore log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore .env files (environment variables)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore build output and compiled files
+dist/
+build/
+
+# Ignore MacOS system files
+.DS_Store
+
+# Ignore coverage reports
+coverage/
+.nyc_output/
+
+# Ignore TypeScript cache and compiled output
+*.tsbuildinfo
+
+# Ignore lock files (optional, depending on whether you want to lock dependencies)
+# package-lock.json
+# yarn.lock
+
+# Ignore IDE and editor-specific files
+.vscode/
+.idea/
+
+# Ignore log folder
+logs
+*.log
+
+# Ignore the temporary files created by OS or editors
+*.swp
+*.tmp
+*.bak

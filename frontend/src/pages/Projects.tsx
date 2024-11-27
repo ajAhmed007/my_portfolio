@@ -3,14 +3,15 @@ import {
   Container,
   Typography,
   Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Button,
-  Chip,
   Box,
+  Chip,
+  useTheme,
+  useMediaQuery,
+  IconButton,
 } from "@mui/material";
+import { motion } from "framer-motion";
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LaunchIcon from '@mui/icons-material/Launch';
 
 const projects = [
   {
@@ -64,73 +65,100 @@ const projects = [
 ];
 
 const Projects: React.FC = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <Container maxWidth="lg" sx={{ mt: 12 }}>
+    <Container maxWidth="lg" sx={{ mt: 12, mb: 8 }}>
       <Typography
-        variant="h4"
-        gutterBottom
-        sx={{ fontWeight: "bold", textAlign: "center", mb: 4 }}
+        variant="h2"
+        component={motion.h2}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        sx={{
+          fontWeight: 800,
+          textAlign: "center",
+          mb: 8,
+          fontSize: isMobile ? "2.5rem" : "3.5rem",
+          background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+        }}
       >
         My Projects
       </Typography>
       <Grid container spacing={4}>
         {projects.map((project, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card
-              sx={{
-                transition: "transform 0.3s ease-in-out",
-                "&:hover": {
-                  transform: "scale(1.05)",
-                },
-                borderRadius: "12px",
-                boxShadow: 3,
-              }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <CardMedia
-                component="img"
-                height="200"
-                image={project.image}
-                alt={project.title}
-                sx={{ borderRadius: "12px 12px 0 0" }}
-              />
-              <CardContent>
-                <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
-                  {project.title}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" paragraph>
-                  {project.description}
-                </Typography>
-
-                {/* Technologies used */}
-                <Box sx={{ mt: 2 }}>
-                  {project.technologies.map((tech, techIndex) => (
-                    <Chip
-                      key={techIndex}
-                      label={tech}
-                      variant="outlined"
-                      sx={{ marginRight: "5px", marginBottom: "5px" }}
-                    />
-                  ))}
-                </Box>
-              </CardContent>
-              <CardActions>
-                <Button
-                  size="small"
-                  variant="contained"
-                  color="primary"
-                  href={project.link}
-                  target="_blank"
+              <Box
+                sx={{
+                  borderRadius: '20px',
+                  overflow: 'hidden',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+                  transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out',
+                  '&:hover': {
+                    transform: 'translateY(-10px)',
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+                    borderColor: theme.palette.primary.main,
+                  },
+                  border: `1px solid ${theme.palette.grey[300]}`,
+                }}
+              >
+                <Box
                   sx={{
-                    mx: "auto", // Center the button
-                    mb: 2,
-                    textTransform: "none",
-                    fontWeight: "bold",
+                    height: '200px',
+                    backgroundImage: `url(${project.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                   }}
-                >
-                  View on GitHub
-                </Button>
-              </CardActions>
-            </Card>
+                />
+                <Box sx={{ p: 3, bgcolor: 'background.paper' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
+                    {project.title}
+                  </Typography>
+                  <Typography variant="body2" sx={{ mb: 2, color: 'text.secondary' }}>
+                    {project.description}
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
+                    {project.technologies.map((tech, techIndex) => (
+                      <Chip
+                        key={techIndex}
+                        label={tech}
+                        size="small"
+                        sx={{
+                          bgcolor: theme.palette.primary.light,
+                          color: theme.palette.primary.contrastText,
+                        }}
+                      />
+                    ))}
+                  </Box>
+                  <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <IconButton
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{ color: theme.palette.primary.main }}
+                    >
+                      <GitHubIcon />
+                    </IconButton>
+                    <IconButton
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{ color: theme.palette.primary.main }}
+                    >
+                      <LaunchIcon />
+                    </IconButton>
+                  </Box>
+                </Box>
+              </Box>
+            </motion.div>
           </Grid>
         ))}
       </Grid>
